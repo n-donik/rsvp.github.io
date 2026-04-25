@@ -60,8 +60,9 @@ h1 {
 
 .invite-image {
   width: 100%;
+  height: auto;
   max-height: 500px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
