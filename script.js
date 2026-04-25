@@ -11,8 +11,7 @@ const inviteImage = document.getElementById("inviteImage");
 const imageFallback = document.getElementById("imageFallback");
 
 const IMAGE_CANDIDATES = [
-  "pradosha-puja.jpg",
-  "pradosha-puja.png",
+  "invitation.jpeg",
   "invitation.jpg",
   "invitation.png",
 ];
