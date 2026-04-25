@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>You're Invited 🎉</h1>
+      <p class="subtitle">Please confirm your attendance.</p>
+
+      <div class="invite-image-wrap" aria-label="Invitation image section">
+        <img
+          id="inviteImage"
+          src="invitation.jpg"
+          alt="Invitation"
+          class="invite-image"
+        />
+        <div id="imageFallback" class="image-fallback" hidden>
+          Add your invitation image as <strong>invitation.jpg</strong>
+        </div>
+      </div>
+
+      <form id="rsvpForm" class="form" novalidate>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" maxlength="100" required placeholder="Enter your name" />
+
+        <label for="people">Number of People</label>
+        <input id="people" name="people" type="number" min="1" max="50" required placeholder="e.g. 2" />
+
+        <button id="submitBtn" type="submit">Submit RSVP</button>
+      </form>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
