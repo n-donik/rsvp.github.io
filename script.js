@@ -1,6 +1,6 @@
 // Paste your deployed Apps Script Web App URL below.
 // Example: https://script.google.com/macros/s/AKfycbx.../exec
-const WEB_APP_URL = "";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxbcU1b5dhr-oKns_Zcb9_J5YGa9qqUN8qCGCyKGj5y-d4QotIGCVc8XLPHo1BoWPS0/exec";
 
 const form = document.getElementById("rsvpForm");
 const nameInput = document.getElementById("name");
