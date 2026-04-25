@@ -10,10 +10,33 @@ const submitBtn = document.getElementById("submitBtn");
 const inviteImage = document.getElementById("inviteImage");
 const imageFallback = document.getElementById("imageFallback");
 
-inviteImage.addEventListener("error", () => {
-  inviteImage.hidden = true;
-  imageFallback.hidden = false;
-});
+const IMAGE_CANDIDATES = [
+  "pradosha-puja.jpg",
+  "pradosha-puja.png",
+  "invitation.jpg",
+  "invitation.png",
+];
+
+function loadInvitationImage(index = 0) {
+  if (index >= IMAGE_CANDIDATES.length) {
+    inviteImage.hidden = true;
+    imageFallback.hidden = false;
+    return;
+  }
+
+  inviteImage.onload = () => {
+    imageFallback.hidden = true;
+    inviteImage.hidden = false;
+  };
+
+  inviteImage.onerror = () => {
+    loadInvitationImage(index + 1);
+  };
+
+  inviteImage.src = IMAGE_CANDIDATES[index];
+}
+
+loadInvitationImage();
 
 function setMessage(text, type = "") {
   message.textContent = text;
@@ -59,7 +82,13 @@ form.addEventListener("submit", async (event) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      let details = "";
+      try {
+        details = await response.text();
+      } catch {
+        details = "";
+      }
+      throw new Error(`HTTP ${response.status}${details ? ` - ${details}` : ""}`);
     }
 
     const result = await response.json();
@@ -71,7 +100,12 @@ form.addEventListener("submit", async (event) => {
     form.reset();
   } catch (err) {
     console.error(err);
-    setMessage("Could not submit RSVP. Please try again.", "error");
+    const msg = String(err && err.message ? err.message : err);
+    if (msg.includes("HTTP 403")) {
+      setMessage("Endpoint access denied (403). Redeploy Apps Script Web App with access set to Anyone.", "error");
+    } else {
+      setMessage("Could not submit RSVP. Please try again.", "error");
+    }
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Submit RSVP";
